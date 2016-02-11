@@ -1,0 +1,40 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://solvegentest/generated"
+           targetNamespace="http://solvegentest/generated" elementFormDefault="qualified">
+
+    <xs:element name="updateCatalogRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="book" type="tns:book"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getCatalogResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="catalog" type="tns:catalog"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="catalog">
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="books" type="tns:book"/>
+        </xs:sequence>
+
+    </xs:complexType>
+
+    <xs:complexType name="book">
+        <xs:sequence>
+            <xs:element name="author" type="xs:string"/>
+            <xs:element name="title" type="xs:string"/>
+            <xs:element name="genre" type="xs:string"/>
+            <xs:element name="price" type="xs:double"/>
+            <xs:element name="publish_date" type="xs:string"/>
+            <xs:element name="description" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:string"/>
+    </xs:complexType>
+
+
+</xs:schema>

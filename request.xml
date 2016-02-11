@@ -1,0 +1,15 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:st="http://solvegentest/generated">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <st:updateCatalogRequest>
+            <st:book id="bk103">
+                <st:author>Corets, Eva</st:author>
+                <st:title>Maeve Ascendant</st:title>
+                <st:genre>Fantasy</st:genre>
+                <st:price>5.95</st:price>
+                <st:publish_date>2000-11-17</st:publish_date>
+                <st:description>After the collapse of a nanotechnology  society in England, the young survivors lay the  foundation for a new society.</st:description>
+            </st:book>
+        </st:updateCatalogRequest>
+    </soapenv:Body>
+</soapenv:Envelope>
