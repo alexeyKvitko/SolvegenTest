@@ -1,0 +1,15 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:st="http://solvegentest/generated">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <st:updateCatalogRequest>
+            <st:book id="bk102">
+                <st:author></st:author>
+                <st:title></st:title>
+                <st:genre></st:genre>
+                <st:price></st:price>
+                <st:publish_date></st:publish_date>
+                <st:description></st:description>
+            </st:book>
+        </st:updateCatalogRequest>
+    </soapenv:Body>
+</soapenv:Envelope>

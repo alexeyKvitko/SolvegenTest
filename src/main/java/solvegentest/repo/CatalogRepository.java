@@ -4,7 +4,6 @@ import org.springframework.stereotype.Component;
 import solvegentest.generated.Book;
 import solvegentest.generated.Catalog;
 
-
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +17,13 @@ public class CatalogRepository {
 
     private static final Catalog catalog = new Catalog();
 
+    public CatalogRepository() {
+
+    }
+
     @PostConstruct
-    public void initData(){
+    public void initData() {
+
         ArrayList<Book> books = new ArrayList<>();
 
         Book bk101 = new Book();
@@ -30,7 +34,6 @@ public class CatalogRepository {
         bk101.setPrice(44.95);
         bk101.setPublishDate("2000-10-01");
         bk101.setDescription("An in-depth look at creating applications with XML.");
-
         books.add(bk101);
 
         Book bk102 = new Book();
@@ -42,23 +45,63 @@ public class CatalogRepository {
         bk102.setPublishDate("2000-12-16");
         bk102.setDescription("A former architect battles corporate zombies, an evil sorceress, and her own childhood to become queen" +
                 " of the world.");
+        books.add(bk102);
 
-        books.add(bk102 );
-
-        catalog.getBooks().addAll( books );
+        catalog.getBooks().addAll(books);
 
     }
 
     /**
-     *  Update book catalog by rules: if book exist  - update attributes else add new book
-     *  to catalog
-     *  @param book - Book
-     *  return catalog - ArrayList<Book>
+     * Update book catalog by rules: if book exist  - update attributes else add new book
+     * to catalog
+     *
+     * @param pBook - Book
+     *             return catalog - ArrayList<Book>
      */
 
-    public Catalog updateCatalog(Book book){
-
+    public Catalog updateCatalog(Book pBook) {
+        if ( pBook == null || pBook.getId().isEmpty() || pBook.getId().equals("?") ){
+            return catalog;
+        }
+        if ( pBook.getAuthor().isEmpty()
+                && pBook.getTitle().isEmpty()
+                && pBook.getGenre().isEmpty()
+                && pBook.getPublishDate().isEmpty()
+                && pBook.getDescription().isEmpty() ){
+            removeBookFromCatalog( pBook.getId() );
+          return catalog;
+        }
+        boolean isNewBook = true;
+        for ( Book book : catalog.getBooks() ){
+            if ( book.getId().equals( pBook.getId() ) ){
+                book.setAuthor( pBook.getAuthor() );
+                book.setTitle( pBook.getTitle() );
+                book.setGenre( pBook.getGenre() );
+                book.setPrice( pBook.getPrice() );
+                book.setPublishDate( pBook.getPublishDate() );
+                book.setDescription( pBook.getDescription() );
+                isNewBook = false;
+                break;
+            }
+        }
+        if ( isNewBook ){
+            catalog.getBooks().add( pBook );
+        }
         return catalog;
+    }
+    /**
+     * Remove book from catalog by id
+     * @param bookId - String
+     */
+    private void removeBookFromCatalog( String bookId ){
+        ArrayList<Book> books = new ArrayList<>();
+        for (Book book : catalog.getBooks() ){
+            if ( !book.getId().equals( bookId ) ){
+                books.add( book );
+            }
+        }
+        catalog.getBooks().removeAll( catalog.getBooks() );
+        catalog.getBooks().addAll( books );
     }
 
 }

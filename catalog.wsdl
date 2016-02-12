@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://solvegentest/generated" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://solvegentest/generated" targetNamespace="http://solvegentest/generated">
+  <wsdl:types>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://solvegentest/generated">
+
+    <xs:element name="updateCatalogRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="book" type="tns:book"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getCatalogResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="catalog" type="tns:catalog"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="catalog">
+        <xs:sequence maxOccurs="unbounded" minOccurs="0">
+            <xs:element name="books" type="tns:book"/>
+        </xs:sequence>
+
+    </xs:complexType>
+
+    <xs:complexType name="book">
+        <xs:sequence>
+            <xs:element name="author" type="xs:string"/>
+            <xs:element name="title" type="xs:string"/>
+            <xs:element name="genre" type="xs:string"/>
+            <xs:element name="price" type="xs:double"/>
+            <xs:element name="publish_date" type="xs:string"/>
+            <xs:element name="description" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:string"/>
+    </xs:complexType>
+
+
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getCatalogResponse">
+    <wsdl:part element="tns:getCatalogResponse" name="getCatalogResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateCatalogRequest">
+    <wsdl:part element="tns:updateCatalogRequest" name="updateCatalogRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="CatalogPort">
+    <wsdl:operation name="getCatalog">
+      <wsdl:output message="tns:getCatalogResponse" name="getCatalogResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateCatalog">
+      <wsdl:input message="tns:updateCatalogRequest" name="updateCatalogRequest">
+    </wsdl:input>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CatalogPortSoap11" type="tns:CatalogPort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getCatalog">
+      <soap:operation soapAction=""/>
+      <wsdl:output name="getCatalogResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateCatalog">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="updateCatalogRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CatalogPortService">
+    <wsdl:port binding="tns:CatalogPortSoap11" name="CatalogPortSoap11">
+      <soap:address location="http://localhost:8080/ws"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
