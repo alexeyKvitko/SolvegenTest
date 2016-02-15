@@ -1,4 +1,4 @@
-package solvegentest.config;
+package solvegentest;
 
 import org.springframework.boot.context.embedded.ServletRegistrationBean;
 import org.springframework.context.ApplicationContext;

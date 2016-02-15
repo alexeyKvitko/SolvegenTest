@@ -1,6 +1,6 @@
 package solvegentest.repo;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import solvegentest.generated.Book;
 import solvegentest.generated.Catalog;
 
@@ -12,7 +12,7 @@ import java.util.List;
  * Created by a.kvitko on 11.02.2016.
  * Repository of web service data.
  */
-@Component
+@Repository
 public class CatalogRepository {
 
     private static final Catalog catalog = new Catalog();
